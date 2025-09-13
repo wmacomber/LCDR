@@ -33,6 +33,10 @@ try:
 except Exception as exc:  # pragma: no cover - jsonschema is required
     raise SystemExit("jsonschema is required: pip install jsonschema") from exc
 
+# In case you want to verify that the chain is running in the right order
+# import langchain
+# langchain.debug = True
+
 # ---- Config loading -------------------------------------------------------
 
 SCHEMA_PATH = pathlib.Path(__file__).parent.with_name("config.schema.json")
