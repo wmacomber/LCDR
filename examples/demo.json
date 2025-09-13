@@ -1,0 +1,33 @@
+{
+  "models": [
+    {
+      "name": "default-llama",
+      "provider": "ollama",
+      "model": "llama3.1:8b",
+      "baseUrl": "http://localhost:11434",
+      "params": { "temperature": 0.0 }
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "inputs": ["userRequest"],
+      "outputs": { "gist": "string" },
+      "modelRef": "default-llama",
+      "systemPrompt": "Summarize the following request in one short sentence.\\n\\n{{userRequest}}"
+    },
+    {
+      "step": 2,
+      "inputs": ["userRequest"],
+      "outputs": { "wordCount": "number" },
+      "command": ["python", "examples/wordcounter.py", "{{userRequest}}"]
+    },
+    {
+      "step": 3,
+      "inputs": ["gist", "wordCount"],
+      "outputs": { "finalResponse": "string" },
+      "modelRef": "default-llama",
+      "systemPrompt": "Here is the gist of a request: {{gist}}. It contains {{wordCount}} words.\\nCraft a short, polite response."
+    }
+  ]
+}
