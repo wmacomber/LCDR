@@ -1,0 +1,19 @@
+{
+  "models": [
+    {
+      "name": "default-llama",
+      "provider": "ollama",
+      "model": "llama3.1:8b",
+      "baseUrl": "http://localhost:11434"
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "inputs": ["userRequest"],
+      "outputs": { "sentiment": "string" },
+      "modelRef": "default-llama",
+      "systemPrompt": "You are a sentiment analyzer. Respond with [positive,neutral,negative].\\n\\n{{userRequest}}"
+    }
+  ]
+}
