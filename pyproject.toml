@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "config-chain-runner"
+version = "0.1.0"
+description = "Config-driven chain runner for LangChain agents"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+  { name = "Walter", email = "admin@macomber.tech" }
+]
+
+# ✅ Pin to Python 3.11 for consistency
+requires-python = "==3.11.*"
+
+dependencies = [
+  "langchain>=0.2.0",
+  "langchain-core>=0.2.0",
+  "langchain-ollama>=0.1.0",   # if using the new split package
+  "pyyaml>=6.0",
+  "jsonschema>=4.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "black>=24.0.0",
+  "mypy>=1.0",
+  "pip-audit>=2.0"
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+strict = true

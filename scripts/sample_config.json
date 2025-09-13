@@ -1,0 +1,49 @@
+{
+    "steps": [
+        {
+            "step": 1,
+            "inputs": [
+                "userRequest"
+            ],
+            "outputs": {
+                "sentiment": "string"
+            },
+            "systemPrompt": "You are a sentiment analyzer and only have the ability to respond with one of [positive,neutral,negative]. Please determine the sentiment of the following text and respond as a sentiment analyzer.\n\n{{userRequest}}"
+        },
+        {
+            "step": 2,
+            "inputs": [
+                "userRequest"
+            ],
+            "outputs": {
+                "purpose": "string"
+            },
+            "systemPrompt": "You are an expert language parser. Please objectively determine the request made in the following text and respond with a single sentence explaining the gist of the request.\n\n{{userRequest}}"
+        },
+        {
+            "step": 3,
+            "inputs": [
+                "userRequest"
+            ],
+            "outputs": {
+                "wordCount": "number"
+            },
+            "command": [
+                "python",
+                "wordcounter.py",
+                "{{userRequest}}"
+            ]
+        },
+        {
+            "step": 4,
+            "inputs": [
+                "sentiment",
+                "purpose"
+            ],
+            "outputs": {
+                "finalResponse": "string"
+            },
+            "systemPrompt": "Please craft a response to the following request, with the understanding that the request was made with {{sentiment}} sentiment.\n\n{{purpose}}"
+        }
+    ]
+}
