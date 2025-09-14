@@ -15,7 +15,9 @@ Example:
 from __future__ import annotations
 
 import argparse
+from dotenv import load_dotenv
 import json
+import os
 import pathlib
 import re
 import subprocess
@@ -33,13 +35,17 @@ try:
 except Exception as exc:  # pragma: no cover - jsonschema is required
     raise SystemExit("jsonschema is required: pip install jsonschema") from exc
 
-# In case you want to verify that the chain is running in the right order
-# import langchain
-# langchain.debug = True
+load_dotenv()
 
+DEBUG = bool(int(os.getenv("LCDR_DEBUG", 0)))
+
+# In case you want to verify that the chain is running in the right order
+if DEBUG is True:
+    import langchain
+    langchain.debug = True
 # ---- Config loading -------------------------------------------------------
 
-SCHEMA_PATH = pathlib.Path(__file__).parent.with_name("config.schema.json")
+SCHEMA_PATH = os.getenv("LCDR_SCHEMA_PATH", pathlib.Path(__file__).parent.with_name("config.schema.json"))
 TEMPLATE_RE = re.compile(r"{{\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*}}")
 
 

@@ -1,7 +1,16 @@
 {
+    "models": [
+        {
+            "name": "default",
+            "provider": "ollama",
+            "model": "gemma3n:latest",
+            "baseUrl": "http://localhost:11434"
+        }
+    ],
     "steps": [
         {
             "step": 1,
+            "modelRef": "default",
             "inputs": [
                 "userRequest"
             ],
@@ -12,6 +21,7 @@
         },
         {
             "step": 2,
+            "modelRef": "default",
             "inputs": [
                 "userRequest"
             ],
@@ -36,6 +46,7 @@
         },
         {
             "step": 4,
+            "modelRef": "default",
             "inputs": [
                 "sentiment",
                 "purpose"
