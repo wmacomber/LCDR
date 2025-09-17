@@ -128,6 +128,8 @@ def render_template(template: str, variables: Mapping[str, Any]) -> str:
         key = match.group(1)
         if key not in variables:
             raise ConfigError(f"unknown variable: {key}")
+        if DEBUG:
+            print(f"VARIABLE:{key} VALUE:{str(variables[key])}")
         return str(variables[key])
 
     return TEMPLATE_RE.sub(repl, template)
