@@ -92,6 +92,21 @@ or detailed errors explaining what’s wrong (bad refs, missing inputs, invalid 
 
 ---
 
+## 🧪 Testing
+
+The automated test suite lives under `tests/` and can be executed entirely
+offline.  Install the development dependencies and run `pytest`:
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+The tests provide lightweight stubs for `langchain_ollama.ChatOllama`, so no
+Ollama daemon or other LLM provider is required.
+
+---
+
 ## 📂 Repository Layout
 
 ```
