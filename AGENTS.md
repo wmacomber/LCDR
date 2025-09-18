@@ -102,3 +102,14 @@ Steps reference them via `modelRef`.
 * See [ARCHITECTURE.md](ARCHITECTURE.md) for execution details.
 * See [CONTRIBUTING.md](CONTRIBUTING.md) for how to extend step types.
 * See [SECURITY.md](SECURITY.md) for safe usage practices.
+
+---
+
+## Testing & Writing Tests
+
+* Run `pytest` from the repository root before committing changes.
+* Tests **must not** rely on live Ollama or other LLM services. Use local fakes
+  (see `install_fake_chatollama` in `tests/test_chainrunner.py`) to satisfy
+  imports when exercising LLM-backed code.
+* Prefer using `sys.executable` when invoking Python subprocesses inside tests
+  so the suite runs consistently across environments.
